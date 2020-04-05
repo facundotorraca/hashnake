@@ -9,76 +9,81 @@
     </head>
 
     <body>
+        <!--"lpos" landscape position-->
+        <!--"vpos" vertical position -->
         <div class="container-fluid" id="game-area">
             <!--"d-none d-md-block" makes the column invisible when the screen size is small or less-->
             <!--"d-flex justify-content-between" makes that each element(E) has the form EXXEXXE where X are spaces-->
             <div id="landscape-mode" class="row d-flex justify-content-between">
-                <div id="arrows-area" class="col-md-3 col-lg-2 align-self-center d-none d-md-block">
+                <div id="arrows-area-lpos" class="col-md-3 col-lg-2 align-self-center d-none d-md-block">
                     <div class="row">
                             <div class="col-md-12">
-                                <button class="gamepad-arrow" id="up-arrow">>></button>
+                                <button class="gamepad-arrow gamepad-arrow-lpos" id="up-arrow-lpos">>></button>
                             </div>
                         </div>
                     <div class="row">
                             <div class="col-md-6">
-                                <button class="gamepad-arrow" id="left-arrow"><<</button>
+                                <button class="gamepad-arrow gamepad-arrow-lpos" id="left-arrow-lpos"><<</button>
                             </div>
                             <div class="col-md-6">
-                                <button class="gamepad-arrow" id="right-arrow">>></button>
+                                <button class="gamepad-arrow gamepad-arrow-lpos" id="right-arrow-lpos">>></button>
                             </div>
                         </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="gamepad-arrow" id="down-arrow">>></button>
+                            <button class="gamepad-arrow gamepad-arrow-lpos" id="down-arrow-lpos">>></button>
                         </div>
                     </div>
                 </div>
                 <div id="screen-area" class="col-md-6 col-lg-8 align-self-center" >
                     <canvas id="screen"></canvas>
                 </div>
-                <div id="buttons-area" class="col-md-3 col-lg-2 align-self-center d-none d-md-block" >
+                <div id="buttons-area-lpos" class="col-md-3 col-lg-2 align-self-center d-none d-md-block" >
                     <div class="row">
                         <div class="col-6 col-sm-6">
-                            <button class="gamepad-button" id="A">A</button>
+                            <button class="gamepad-button gamepad-button-lpos" id="A-lpos">A</button>
                         </div>
                         <div class="col-6 col-sm-6">
-                            <button class="gamepad-button" id="B">B</button>
+                            <button class="gamepad-button gamepad-button-lpos" id="B-lpos">B</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!--"d-md-none" makes the column invisible when the screen size is medium or more-->
-            <div id="vertical-mode" class="row d-md-none">
+            <!--"d-flex justify-content-between" makes that each element(E) has the form EXXEXXE where X are spaces-->
+            <div id="vertical-mode" class="row d-md-none row d-flex justify-content-between">
                 <div id="arrows-area-vpos" class="col-6 col-sm-6 align-self-center">
-                    <div class="row justify-content-center">
-                        <div class="col">
-                            <button class="gamepad-arrow" id="up-arrow-vpos"><i class="fas fa-angle-double-up"></i></button>
+                    <div class="row">
+                        <div class="col-12 col-md-12">
+                            <button class="gamepad-arrow gamepad-arrow-vpos" id="up-arrow-vpos">>></button>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
+                    <div class="row">
                         <div class="col-6 col-sm-6">
-                            <button class="gamepad-arrow" id="left-arrow-vpos"><i class="fas fa-angle-double-left"></i></button>
+                            <button class="gamepad-arrow gamepad-arrow-vpos" id="left-arrow-vpos"><<</button>
                         </div>
                         <div class="col-6 col-sm-6">
-                            <button class="gamepad-arrow" id="right-arrow-vpos"><i class="fas fa-angle-double-right"></i></button>
+                            <button class="gamepad-arrow gamepad-arrow-vpos" id="right-arrow-vpos">>></button>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col">
-                            <button class="gamepad-arrow" id="down-arrow-vpos"><i class="fas fa-angle-double-down"></i></button>
+                    <div class="row">
+                        <div class="col-12 col-md-12">
+                            <button class="gamepad-arrow gamepad-arrow-vpos" id="down-arrow-vpos">>></button>
                         </div>
                     </div>
                 </div>
                 <div id="buttons-area-vpos" class="col-6 col-sm-6 align-self-center">
                     <div class="row">
-                        <div class="col-6 col-sm-6">
-                            <button class="gamepad-button" id="A-vpos">A</button>
+                        <!--"d-flex justify-content-end" allow the element(E) the form XXE where X are spaces-->
+                        <div class="col-6 col-sm-6 d-flex justify-content-end">
+                            <button class="gamepad-button gamepad-button-vpos" id="A-vpos">A</button>
                         </div>
-                        <div class="col-6 col-sm-6">
-                            <button class="gamepad-button" id="B-vpos">B</button>
+                        <!--"d-flex justify-content-start" allow the element(E) the form EXX where X are spaces-->
+                        <div class="col-6 col-sm-6 d-flex justify-content-start">
+                            <button class="gamepad-button gamepad-button-vpos" id="B-vpos">B</button>
                         </div>
-                    </div>
+                    </dstart
                 </div>
             </div>
         </div>

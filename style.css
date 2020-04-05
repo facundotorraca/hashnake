@@ -61,52 +61,94 @@ body {
     overflow: hidden; /*avoid scrollbar*/
 }
 
+/*-----------------------GAMEPAD-ARROW-STYLE---------------------*/
 .gamepad-arrow {
     background: var(--color-primario);
     color: var(--color-secundario);
-    border-radius: 8px;
-    border: 0.18em solid var(--color-secundario);
+    border-style: solid;
     transition-duration: 0.4s;
-    padding: 0.1em;
-
+    border-color: var(--color-secundario);
     text-align: center;
     text-decoration: none;
-    font-size: calc(8px + 1.2vw);
 }
 
-#up-arrow {
+.gamepad-arrow-lpos {
+    border-radius: 8px;
+    font-size: calc(8px + 1.2vw);
+    padding: 0.1em;
+    border-width: 0.2em;
+}
+
+.gamepad-arrow-vpos {
+    border-radius: 5px;
+    font-size: calc(8px + 1.5vw);
+    padding: 0.3em;
+    border-width: 0.18em;
+}
+
+#up-arrow-lpos {
     transform-origin: center;
     transform: rotate(270deg);
     margin-bottom: 0.5em;
-
 }
 
-#down-arrow {
+#down-arrow-lpos {
     transform-origin: center;
     transform: rotate(90deg);
     margin-top: 0.5em;
-
 }
 
-#left-arrow {
+#left-arrow-lpos {
     margin-right: 0.5em;
 }
 
-#right-arrow {
+#right-arrow-lpos {
     margin-left: 0.5em;
 }
 
-.gamepad-button{
+#up-arrow-vpos{
+    transform-origin: center;
+    transform: rotate(270deg);
+    margin-bottom: 0.5em;
+    margin-top: 1.5em;
+}
+
+#down-arrow-vpos{
+    transform-origin: center;
+    transform: rotate(90deg);
+    margin-top: 0.7em;
+}
+
+#left-arrow-vpos {
+    margin-right: 0.5em;
+}
+
+#right-arrow-vpos {
+    margin-left: 0.5em;
+}
+/*---------------------------------------------------------------*/
+
+/*-----------------------GAMEPAD-BUTTON-STYLE--------------------*/
+.gamepad-button {
     background: var(--color-primario);
     color: var(--color-secundario);
-    border-radius: 8px;
-    border: 0.15em solid var(--color-secundario);
+    border-style: solid;
+    border-color: var(--color-secundario);
     transition-duration: 0.4s;
-    padding: 0.1em;
-
     text-align: center;
     text-decoration: none;
+}
+
+.gamepad-button-lpos {
+    border-radius: 8px;
+    border-width: 0.15em;
+    padding: 0.1em;
     font-size: 3vw;
 }
 
-
+.gamepad-button-vpos {
+    border-radius: 5px;
+    border-width: 0.15em;
+    padding: 0.2em;
+    font-size: calc(10px + 2vw);
+}

@@ -1,3 +1,4 @@
 $(document).ready(() => {
-   screen.orientation.lock('landscape');
+   screen.orientation.lock();
+   screen.lockOrientation("orientation");
 });

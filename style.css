@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+/*Allow hover effect only on desktop browsers*/
+@media (hover: hover) {
+    .gamepad-button:hover {
+        background: var(--color-secundario);
+        color: var(--color-primario);
+    }
+
+    .gamepad-arrow:hover {
+        background: var(--color-secundario);
+        color: var(--color-primario);
+    }
+}
+
+:root {
+    --color-primario: #17202A; /*black*/
+    --color-secundario: gold; /*dark-yellow*/
+    --color-terciario: #ED2400; /*red*/
+}
+
+html {
+    background: var(--color-primario);
+}
+
+body {
+    background: var(--color-primario);
+    font-family: "Press Start 2P", serif /*if font not available*/;
+    color: var(--color-secundario); /*font color*/
+    border-radius: 10px;
+    border: solid 0.30em var(--color-secundario);
+
+    height: 90%;
+    width: 90%;
+
+    margin-top: 5%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+
+    padding-top: 2em;
+    padding-right: 2em;
+    padding-left: 2em;
+    padding-bottom: 2em;
+
+    text-align: center;
+    word-wrap: break-word;
+}
+
+#screen {
+    background: var(--color-primario);
+    border-radius: 10px;
+    border: solid 0.35em var(--color-secundario);
+
+    height: auto;
+    width: 100%;
+
+    font-weight: bold;
+    overflow: hidden; /*avoid scrollbar*/
+}
+
+.gamepad-arrow {
+    background: var(--color-primario);
+    color: var(--color-secundario);
+    border-radius: 8px;
+    border: 3px solid var(--color-secundario);
+    transition-duration: 0.4s;
+
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.5vw;
+}
+
+.gamepad-button{
+    background: var(--color-primario);
+    color: var(--color-secundario);
+    border-radius: 8px;
+    border: 3px solid var(--color-secundario);
+    transition-duration: 0.4s;
+
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.5vw;
+}

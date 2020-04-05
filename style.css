@@ -39,9 +39,10 @@ body {
     display: table;
     text-align: center;
     word-wrap: break-word;
-
 }
 
+
+/*--------------------------SCREEN-STYLE-------------------------*/
 #screen {
     background: var(--color-primario);
     border-radius: 10px;
@@ -53,6 +54,7 @@ body {
     font-weight: bold;
     overflow: hidden; /*avoid scrollbar*/
 }
+/*---------------------------------------------------------------*/
 
 /*-----------------------GAMEPAD-ARROW-STYLE---------------------*/
 .gamepad-arrow {
@@ -145,3 +147,4 @@ body {
     padding: 0.2em;
     font-size: calc(10px + 2vw);
 }
+/*---------------------------------------------------------------*/

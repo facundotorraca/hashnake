@@ -11,7 +11,8 @@
     <body>
         <div class="container-fluid" id="game-area">
             <div class="row">
-                <div class="col-3 col-sm-2 align-self-center" id="arrows-area">
+                <!--"d-none d-md-block" makes the column invisible when the screen size is small-->
+                <div class="col-md-2 align-self-center d-none d-md-block" id="arrows-area">
                     <div class="row justify-content-center">
                         <button class="gamepad-arrow" id="up-arrow"><i class="fas fa-angle-double-up"></i></button>
                     </div>
@@ -20,7 +21,7 @@
                         <div class="col-6 col-sm-6">
                             <button class="gamepad-arrow" id="left-arrow"><i class="fas fa-angle-double-left"></i></button>
                         </div>
-                        <div class="col-6 col-sm-6">
+                        <div class="col-12 col-sm-6">
                             <button class="gamepad-arrow" id="right-arrow"><i class="fas fa-angle-double-right"></i></button>
                         </div>
                     </div>
@@ -30,11 +31,11 @@
                     </div>
                 </div>
 
-                <div class="col-6 col-sm-8 align-self-center" id="screen-area">
+                <div class="col-12 col-md-8 align-self-center" id="screen-area">
                     <canvas id="screen"></canvas>
                 </div>
 
-                <div class="col-3 col-sm-2 align-self-center" id="buttons-area">
+                <div class="col-md-2 align-self-center d-none d-md-block" id="buttons-area">
                     <div class="row">
                         <div class="col-6 col-sm-6">
                             <button class="gamepad-button" id="A">A</button>
@@ -44,6 +45,41 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!--"d-md-none" makes the column invisible when the screen size is medium or more-->
+            <div class="row d-md-none">
+
+                <div class="col-6 col-sm-6 align-self-center" id="arrows-area-small">
+                    <div class="row justify-content-center">
+                        <button class="gamepad-arrow" id="up-arrow-small"><i class="fas fa-angle-double-up"></i></button>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-6 col-sm-6">
+                            <button class="gamepad-arrow" id="left-arrow-small"><i class="fas fa-angle-double-left"></i></button>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <button class="gamepad-arrow" id="right-arrow-small"><i class="fas fa-angle-double-right"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <button class="gamepad-arrow" id="down-arrow-small"><i class="fas fa-angle-double-down"></i></button>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-6 align-self-center" id="buttons-area-small">
+                    <div class="row">
+                        <div class="col-6 col-sm-6">
+                            <button class="gamepad-button" id="A-small">A</button>
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <button class="gamepad-button" id="B-small">B</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>

@@ -38,10 +38,10 @@ body {
     margin-left: auto;
     margin-bottom: auto;
 
-    padding-top: 2em;
-    padding-right: 2em;
-    padding-left: 2em;
-    padding-bottom: 2em;
+    padding-top: 1em;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
 
     text-align: center;
     word-wrap: break-word;
@@ -52,7 +52,7 @@ body {
     border-radius: 10px;
     border: solid 0.35em var(--color-secundario);
 
-    height: auto;
+    height: 100%;
     width: 100%;
 
     font-weight: bold;

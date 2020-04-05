@@ -30,8 +30,8 @@ body {
     border-radius: 10px;
     border: solid 0.30em var(--color-secundario);
 
-    height: 90%;
-    width: 90%;
+    height: 70vh;
+    width: 95vw;
 
     margin-top: 5%;
     margin-right: auto;
@@ -43,8 +43,10 @@ body {
     padding-left: 1em;
     padding-bottom: 1em;
 
+    display: table;
     text-align: center;
     word-wrap: break-word;
+
 }
 
 #screen {
@@ -52,7 +54,7 @@ body {
     border-radius: 10px;
     border: solid 0.35em var(--color-secundario);
 
-    height: 100%;
+    height: 65vh;
     width: 100%;
 
     font-weight: bold;
@@ -63,22 +65,48 @@ body {
     background: var(--color-primario);
     color: var(--color-secundario);
     border-radius: 8px;
-    border: 3px solid var(--color-secundario);
+    border: 0.18em solid var(--color-secundario);
     transition-duration: 0.4s;
+    padding: 0.1em;
 
     text-align: center;
     text-decoration: none;
-    font-size: 3vw;
+    font-size: calc(8px + 1.2vw);
+}
+
+#up-arrow {
+    transform-origin: center;
+    transform: rotate(270deg);
+    margin-bottom: 0.5em;
+
+}
+
+#down-arrow {
+    transform-origin: center;
+    transform: rotate(90deg);
+    margin-top: 0.5em;
+
+}
+
+#left-arrow {
+    margin-right: 0.5em;
+}
+
+#right-arrow {
+    margin-left: 0.5em;
 }
 
 .gamepad-button{
     background: var(--color-primario);
     color: var(--color-secundario);
     border-radius: 8px;
-    border: 3px solid var(--color-secundario);
+    border: 0.15em solid var(--color-secundario);
     transition-duration: 0.4s;
+    padding: 0.1em;
 
     text-align: center;
     text-decoration: none;
     font-size: 3vw;
 }
+
+

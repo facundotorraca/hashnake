@@ -11,31 +11,32 @@
     <body>
         <div class="container-fluid" id="game-area">
             <!--"d-none d-md-block" makes the column invisible when the screen size is small or less-->
-            <div id="landscape-mode" class="row">
-                <div id="arrows-area" class="col-md-2 align-self-center d-none d-md-block">
-                    <div class="row justify-content-center">
+            <!--"d-flex justify-content-between" makes that each element(E) has the form EXXEXXE where X are spaces-->
+            <div id="landscape-mode" class="row d-flex justify-content-between">
+                <div id="arrows-area" class="col-md-3 col-lg-2 align-self-center d-none d-md-block">
+                    <div class="row">
+                            <div class="col-md-12">
+                                <button class="gamepad-arrow" id="up-arrow">>></button>
+                            </div>
+                        </div>
+                    <div class="row">
+                            <div class="col-md-6">
+                                <button class="gamepad-arrow" id="left-arrow"><<</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="gamepad-arrow" id="right-arrow">>></button>
+                            </div>
+                        </div>
+                    <div class="row">
                         <div class="col-md-12">
-                            <button class="gamepad-arrow" id="up-arrow"><i class="fas fa-angle-double-up"></i></button>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <button class="gamepad-arrow" id="left-arrow"><i class="fas fa-angle-double-left"></i></button>
-                        </div>
-                        <div class="col-md-6">
-                            <button class="gamepad-arrow" id="right-arrow"><i class="fas fa-angle-double-right"></i></button>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col">
-                            <button class="gamepad-arrow" id="down-arrow"><i class="fas fa-angle-double-down"></i></button>
+                            <button class="gamepad-arrow" id="down-arrow">>></button>
                         </div>
                     </div>
                 </div>
-                <div id="screen-area" class="col-md-8 align-self-center" >
+                <div id="screen-area" class="col-md-6 col-lg-8 align-self-center" >
                     <canvas id="screen"></canvas>
                 </div>
-                <div id="buttons-area" class="col-md-2 align-self-center d-none d-md-block" >
+                <div id="buttons-area" class="col-md-3 col-lg-2 align-self-center d-none d-md-block" >
                     <div class="row">
                         <div class="col-6 col-sm-6">
                             <button class="gamepad-button" id="A">A</button>

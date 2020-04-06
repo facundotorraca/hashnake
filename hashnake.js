@@ -1,62 +1,71 @@
-const XL_SCREEN = 1200;
-const LG_SCREEN = 992;
-const MD_SCREEN = 768;
+import {Snake} from './snake.js';
+import * as SnakeRules  from './rules.js';
+import * as ScreenUtils from './screenUtils.js';
 
-const XL_SNAKE_BOX = 20;
-const LG_SNAKE_BOX = 16;
-const MD_SNAKE_BOX = 14;
-const SM_SNAKE_BOX = 12;
+const REFRESH_TIME = 66; //15 FPS
+const INITIAL_SNAKE_SIZE = 1;
 
+let snake = undefined;
+let $screen = undefined;
+let movement = undefined;
 let screenSize = undefined;
+let screenCenter = undefined;
 let snakeBoxSize = undefined;
 
 $(document).ready(() => {
-    roundScreenSize();
-    screenSize = getScreenSize();
-    snakeBoxSize = getSnakeBoxSize();
-
+    playGame();
     window.addEventListener("orientationchange", () => handleOrientationChange());
 });
 
+$(document).keydown((e) => {
+    let newMove = e.key;
+    if (SnakeRules.movementIsAllowed(newMove, movement)) {
+        movement = newMove;
+        e.preventDefault(); //Prevent the default action (scroll)
+    }
+});
+
+function initializeGame() {
+    $screen = $('#screen');
+    movement = SnakeRules.RIGHT;
+    ScreenUtils.roundScreenSize($screen);
+    screenSize = ScreenUtils.getScreenSize($screen);
+    screenCenter = ScreenUtils.getScreenCenter($screen);
+    snakeBoxSize = ScreenUtils.getSnakeBoxSize(window);
+    snake = new Snake(INITIAL_SNAKE_SIZE, screenCenter);
+}
+
+function playGame() {
+     initializeGame();
+     continueGame();
+}
+
+function continueGame() {
+    console.log(screenSize);
+    console.log(screenCenter);
+
+
+    setTimeout(() => {
+        ScreenUtils.clearScreen($screen);
+        //drawFood();
+        snake.move(movement);
+        ScreenUtils.drawSnake(snake, $screen, snakeBoxSize);
+        if (snakeIsAlive())
+            continueGame();
+        else
+            handleDeath();
+
+    }, REFRESH_TIME);
+}
+
+function handleDeath() {
+
+}
+
+function snakeIsAlive() {
+    return true;
+}
+
 function handleOrientationChange() {
     location.reload();
-}
-
-function getSnakeBoxSize() {
-    // Values from Bootstrap
-    if (window.innerWidth >= XL_SCREEN)
-        return XL_SNAKE_BOX;
-    if (window.innerWidth >= LG_SCREEN)
-        return LG_SNAKE_BOX;
-    if (window.innerWidth >= MD_SCREEN)
-        return MD_SNAKE_BOX;
-    //if (window.innerWidth < SM_SCREEN)
-    return SM_SNAKE_BOX;
-}
-
-function getScreenSize() {
-    let screen = getScreen();
-    let height = screen.getBoundingClientRect().height;
-    let width = screen.getBoundingClientRect().width;
-    return {height: height, width: width};
-}
-
-function roundScreenSize() {
-    let currentScreenSize = getScreenSize();
-
-    let newHeight = Math.floor(currentScreenSize.height);
-    let newWidth = Math.floor(currentScreenSize.width);
-
-    $screen = $('#screen');
-    $screen.css('width', newWidth);
-    $screen.css('height',newHeight);
-}
-
-function getCanvasContext() {
-    return $('#screen')[0].getContext('2d');
-}
-
-function getScreen() {
-    /*dont know why query selector dont work*/
-    return document.getElementById('screen');
 }

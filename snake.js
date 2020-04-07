@@ -1,7 +1,5 @@
 import {RIGHT, LEFT, DOWN, UP} from "./rules.js";
 
-const STEPS = 8; //Number of blocks to add when moving
-
 function _getMovementDirection(movement) {
     switch (movement) {
         case RIGHT:
@@ -18,8 +16,8 @@ function _getMovementDirection(movement) {
 function SnakeHead(position) {
     this.position = position;
 
-    this.move = function (direction) {
-        this.position.move(direction, STEPS);
+    this.move = function (direction, steps) {
+        this.position.move(direction, steps);
     }
 }
 
@@ -31,17 +29,19 @@ function SnakeBody() {
     }
 }
 
-function Snake(size, startPosition) {
+export function Snake(size, startPosition) {
     this.size = size;
     this.startPosition = startPosition;
 
     this.head = new SnakeHead(startPosition);
     this.body = new SnakeBody();
 
-    this.move = function (movement) {
+    this.move = function (movement, steps) {
         let direction = _getMovementDirection(movement);
-        this.head.move(direction);
-    }
-}
+        this.head.move(direction, steps);
+    };
 
-export {Snake};
+    this.ate = function (food) {
+        return this.head.position.isEqualTo(food.position);
+    };
+}

@@ -1,16 +1,15 @@
+import {Food} from './food.js';
 import {Snake} from './snake.js';
-import * as SnakeRules  from './rules.js';
-import * as ScreenUtils from './screenUtils.js';
+import {Screen} from './screen.js';
+import * as Rules  from './rules.js';
 
-const REFRESH_TIME = 66; //15 FPS
+const REFRESH_TIME = 100; //15 FPS
 const INITIAL_SNAKE_SIZE = 1;
 
+let food = undefined;
 let snake = undefined;
-let $screen = undefined;
+let screen = undefined;
 let movement = undefined;
-let screenSize = undefined;
-let screenCenter = undefined;
-let snakeBoxSize = undefined;
 
 $(document).ready(() => {
     playGame();
@@ -19,20 +18,17 @@ $(document).ready(() => {
 
 $(document).keydown((e) => {
     let newMove = e.key;
-    if (SnakeRules.movementIsAllowed(newMove, movement)) {
+    if (Rules.movementIsAllowed(newMove, movement)) {
         movement = newMove;
         e.preventDefault(); //Prevent the default action (scroll)
     }
 });
 
 function initializeGame() {
-    $screen = $('#screen');
-    movement = SnakeRules.RIGHT;
-    ScreenUtils.roundScreenSize($screen);
-    screenSize = ScreenUtils.getScreenSize($screen);
-    screenCenter = ScreenUtils.getScreenCenter($screen);
-    snakeBoxSize = ScreenUtils.getSnakeBoxSize(window);
-    snake = new Snake(INITIAL_SNAKE_SIZE, screenCenter);
+    movement = Rules.RIGHT;
+    screen = new Screen($('#screen'), window);
+    food = new Food(screen.bounds);
+    snake = new Snake(INITIAL_SNAKE_SIZE, screen.snakeBeginPosition);
 }
 
 function playGame() {
@@ -41,16 +37,19 @@ function playGame() {
 }
 
 function continueGame() {
-    console.log(screenSize);
-    console.log(screenCenter);
 
+   // screen.drawFood(food);
+    //screen.drawSnake(snake);
 
     setTimeout(() => {
-        ScreenUtils.clearScreen($screen);
-        //drawFood();
-        snake.move(movement);
-        ScreenUtils.drawSnake(snake, $screen, snakeBoxSize);
-        if (snakeIsAlive())
+        screen.clear();
+        screen.drawFood(food);
+        snake.move(movement, screen.cellSide);
+        if (snake.ate(food)) {
+            food = new Food(screen.bounds);
+        }
+        screen.drawSnake(snake);
+        if (Rules.snakeIsAlive(snake, screen))
             continueGame();
         else
             handleDeath();
@@ -59,11 +58,7 @@ function continueGame() {
 }
 
 function handleDeath() {
-
-}
-
-function snakeIsAlive() {
-    return true;
+    playGame();
 }
 
 function handleOrientationChange() {

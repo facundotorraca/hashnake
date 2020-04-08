@@ -30,7 +30,6 @@ $(document).keydown((e) => {
     }
 });
 
-
 function handleArrowButton(newMove) {
     if (Rules.movementIsAllowed(newMove, movement))
         movement = newMove;
@@ -49,8 +48,6 @@ function playGame() {
 }
 
 function continueGame() {
-
-
     setTimeout(() => {
         screen.clear();
         screen.drawFood(food);

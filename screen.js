@@ -2,9 +2,12 @@ import {Coordinate} from "./coordinate.js";
 
 const FOOD_BODY_CHAR = '@';
 const SNAKE_BODY_CHAR = '#';
+const FONT_STYLE = 'Verdana';
+const FONT_WEIGHT = 'bolder';
+
 const TOTAL_LINE_CELLS = 40;
 
-/*---------AUXILIARY-FUNCTIONS------------*/
+/*-------CANVAS-AUXILIARY-FUNCTIONS-------*/
 function _getCanvasSize($canvas) {
     let HTML_DOM_canvas = $canvas[0]; //A HTML DOM Object
     let width = HTML_DOM_canvas.getBoundingClientRect().width;
@@ -33,6 +36,14 @@ function _getCanvasCellSide($canvas) {
 
 function _getCanvas2DContext($canvas) {
     return $canvas[0].getContext('2d');
+}
+
+function _setCanvasFont($canvas, cellSide) {
+    let context = _getCanvas2DContext($canvas);
+    //Formula to get an approximated font size to fill the cell
+    let a = Math.ceil(Math.sqrt(cellSide));
+    let fontSize = Math.pow(a, 2);
+    context.font = `${FONT_WEIGHT} ${fontSize}px ${FONT_STYLE}`;
 }
 
 function _getSnakeBeginPosition(canvasCenter, canvasCellSide) {
@@ -103,7 +114,6 @@ function _configureCanvasOnDevice($canvas, deviceWindow) {
         _getCanvas2DContext($canvas).scale(correctionRatio, correctionRatio);
 }
 
-
 /*-------------SCREEN-BOUNDS--------------*/
 function ScreenBound(height, width, cellSide) {
     //Use the convention from canvas: (0,0) top-left corner
@@ -138,35 +148,23 @@ export function Screen($screen, deviceWindow) {
         let context = _getCanvas2DContext(this.screen);
 
         let head = snake.head.position;
-        let body = snake.body.positions;
+        let body = snake.body.position;
         let tail = snake.tail.position;
 
+        context.fillStyle = 'white';
+        _setCanvasFont(this.screen, this.cellSide);
 
-        context.lineWidth = 5;
-
-        let fontSize = Math.ceil(Math.sqrt(this.cellSide));
-        context.font = (fontSize*fontSize) + 'px Verdana Bolder';
-
-        //context.fillStyle = 'red';
-        //context.fillRect(head.x, head.y, this.cellSide, this.cellSide);
-
-        context.fillStyle = 'red';
         context.fillText(SNAKE_BODY_CHAR, head.x, head.y + this.cellSide);
-
-        for (let i = 0; i < body.length; i++)
-            context.fillText(SNAKE_BODY_CHAR, body[i].x, body[i].y + this.cellSide);
-
+        body.forEach((bodyPart) => {
+            context.fillText(SNAKE_BODY_CHAR, bodyPart.x, bodyPart.y + this.cellSide);
+        });
         context.fillText(SNAKE_BODY_CHAR, tail.x, tail.y + this.cellSide);
-
-
-        //drawGrid(this.screen, this.cellSide);
     };
 
     this.drawFood = function(food) {
         let context = _getCanvas2DContext(this.screen);
 
-        let fontSize = Math.ceil(Math.sqrt(this.cellSide));
-        context.font = (fontSize*fontSize) + 'px Verdana Bolder';
+        _setCanvasFont(this.screen, this.cellSide);
 
         while (food.position.x % this.cellSide !== 0)
             food.position.moveX(1);
@@ -174,7 +172,7 @@ export function Screen($screen, deviceWindow) {
         while (food.position.y % this.cellSide !== 0)
             food.position.moveY(1);
 
-        context.fillStyle = 'gold';
+        context.fillStyle = 'red';
         context.fillText(FOOD_BODY_CHAR, food.position.x, food.position.y + this.cellSide);
     };
 
@@ -186,21 +184,3 @@ export function Screen($screen, deviceWindow) {
     };
 }
 
-var drawGrid = function(canvas, cellSide) {
-    var ctx = _getCanvas2DContext(canvas);
-    let w = _getCanvasSize(canvas).width;
-    let h = _getCanvasSize(canvas).height;
-
-
-    for (let x=0;x<=w;x+=cellSide) {
-        for (let y=0;y<=h;y+=cellSide) {
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, h);
-            ctx.stroke();
-            ctx.moveTo(0, y);
-            ctx.lineTo(w, y);
-            ctx.stroke();
-        }
-    }
-
-    };

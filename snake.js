@@ -16,32 +16,32 @@ function _getMovementDirection(movement) {
 }
 
 /*------------------SNAKE-----------------*/
-function SnakeHead(position) {
-    this.position = position;
+function SnakeHead(startPosition) {
+    this.position = startPosition;
 
     this.move = function (direction, steps) {
         this.position.move(direction, steps);
     }
 }
 
-function SnakeBody(position) {
-    this.positions = [position];
+function SnakeBody(startPosition) {
+    this.position = [startPosition];
 
-    this.addPart = function (position) {
-        this.positions.push(position);
+    this.addPart = function (newPosition) {
+        this.position.push(newPosition);
     };
 
     this.move = function (previousHeadPos) {
-        this.positions.unshift(previousHeadPos);
-        this.positions.pop();
+        this.position.unshift(previousHeadPos);
+        this.position.pop();
     };
 
     this.getLastPart = function () {
-        return this.positions[this.positions.length - 1];
+        return this.position[this.position.length - 1];
     };
 
     this.wasBitten = function (head) {
-        this.positions.forEach((bodyPosition) => {
+        this.position.forEach((bodyPosition) => {
             if (bodyPosition.isEqualTo(head.position))
                 return true;
         });
@@ -49,11 +49,11 @@ function SnakeBody(position) {
     }
 }
 
-function SnakeTail(position) {
-    this.position = position;
+function SnakeTail(startPosition) {
+    this.position = startPosition;
 
-    this.move = function (position) {
-        this.position = position;
+    this.move = function (newPosition) {
+        this.position = newPosition;
     };
 
     this.wasBitten = function (head) {

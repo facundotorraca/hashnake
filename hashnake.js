@@ -49,6 +49,8 @@ function playGame() {
 }
 
 function continueGame() {
+
+
     setTimeout(() => {
         screen.clear();
         screen.drawFood(food);

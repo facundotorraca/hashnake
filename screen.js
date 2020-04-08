@@ -1,6 +1,8 @@
 import {Coordinate} from "./coordinate.js";
 
-let TOTAL_LINE_CELLS = 40;
+const FOOD_BODY_CHAR = '@';
+const SNAKE_BODY_CHAR = '#';
+const TOTAL_LINE_CELLS = 40;
 
 /*---------AUXILIARY-FUNCTIONS------------*/
 function _getCanvasSize($canvas) {
@@ -139,21 +141,32 @@ export function Screen($screen, deviceWindow) {
         let body = snake.body.positions;
         let tail = snake.tail.position;
 
-        context.fillStyle = 'white'; context.lineWidth = 1;
-        context.fillRect(head.x, head.y, this.cellSide, this.cellSide);
-        context.fillRect(tail.x, tail.y, this.cellSide, this.cellSide);
 
-        for (let i = 0; i < body.length; i++) {
-            context.fillRect(body[i].x, body[i].y, this.cellSide, this.cellSide);
-            context.strokeRect(body[i].x, body[i].y, this.cellSide, this.cellSide);
-        }
+        context.lineWidth = 5;
 
-        context.strokeRect(head.x, head.y, this.cellSide, this.cellSide);
-        context.strokeRect(tail.x, tail.y, this.cellSide, this.cellSide);
+        let fontSize = Math.ceil(Math.sqrt(this.cellSide));
+        context.font = (fontSize*fontSize) + 'px Verdana Bolder';
+
+        //context.fillStyle = 'red';
+        //context.fillRect(head.x, head.y, this.cellSide, this.cellSide);
+
+        context.fillStyle = 'red';
+        context.fillText(SNAKE_BODY_CHAR, head.x, head.y + this.cellSide);
+
+        for (let i = 0; i < body.length; i++)
+            context.fillText(SNAKE_BODY_CHAR, body[i].x, body[i].y + this.cellSide);
+
+        context.fillText(SNAKE_BODY_CHAR, tail.x, tail.y + this.cellSide);
+
+
+        //drawGrid(this.screen, this.cellSide);
     };
 
     this.drawFood = function(food) {
         let context = _getCanvas2DContext(this.screen);
+
+        let fontSize = Math.ceil(Math.sqrt(this.cellSide));
+        context.font = (fontSize*fontSize) + 'px Verdana Bolder';
 
         while (food.position.x % this.cellSide !== 0)
             food.position.moveX(1);
@@ -162,10 +175,7 @@ export function Screen($screen, deviceWindow) {
             food.position.moveY(1);
 
         context.fillStyle = 'gold';
-        context.fillRect(food.position.x, food.position.y, this.cellSide, this.cellSide);
-
-        context.lineWidth = 1;
-        context.strokeRect(food.position.x, food.position.y, this.cellSide, this.cellSide);
+        context.fillText(FOOD_BODY_CHAR, food.position.x, food.position.y + this.cellSide);
     };
 
     this.isBetweenBounds = function (snake) {
@@ -175,3 +185,22 @@ export function Screen($screen, deviceWindow) {
         return isBetweenX && isBetweenY;
     };
 }
+
+var drawGrid = function(canvas, cellSide) {
+    var ctx = _getCanvas2DContext(canvas);
+    let w = _getCanvasSize(canvas).width;
+    let h = _getCanvasSize(canvas).height;
+
+
+    for (let x=0;x<=w;x+=cellSide) {
+        for (let y=0;y<=h;y+=cellSide) {
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, h);
+            ctx.stroke();
+            ctx.moveTo(0, y);
+            ctx.lineTo(w, y);
+            ctx.stroke();
+        }
+    }
+
+    };

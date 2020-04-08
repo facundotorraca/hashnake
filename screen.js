@@ -102,7 +102,7 @@ function _configureCanvasOnDevice($canvas, deviceWindow) {
 }
 
 
-/*-------------SCREEN-LIMITS--------------*/
+/*-------------SCREEN-BOUNDS-------------*/
 function ScreenBound(height, width, cellSide) {
     //Use the convention from canvas: (0,0) top-left corner
     this.bottom = height - cellSide;
@@ -121,7 +121,6 @@ export function Screen($screen, deviceWindow) {
     //Screen is initialized with configured values
     this.size = _getCanvasSize($screen);
     this.center = _getCanvasCenter($screen);
-
     this.snakeBeginPosition = _getSnakeBeginPosition(this.center, this.cellSide);
 
     //Screen limits available for the snake
@@ -134,15 +133,22 @@ export function Screen($screen, deviceWindow) {
     };
 
     this.drawSnake = function(snake) {
-
         let context = _getCanvas2DContext(this.screen);
         let head = snake.head.position;
+        let body = snake.body.positions;
+        let tail = snake.tail.position;
 
-        context.fillStyle = 'red';
+        context.fillStyle = 'white'; context.lineWidth = 1;
         context.fillRect(head.x, head.y, this.cellSide, this.cellSide);
+        context.fillRect(tail.x, tail.y, this.cellSide, this.cellSide);
 
-        context.lineWidth = 1;
+        for (let i = 0; i < body.length; i++) {
+            context.fillRect(body[i].x, body[i].y, this.cellSide, this.cellSide);
+            context.strokeRect(body[i].x, body[i].y, this.cellSide, this.cellSide);
+        }
+
         context.strokeRect(head.x, head.y, this.cellSide, this.cellSide);
+        context.strokeRect(tail.x, tail.y, this.cellSide, this.cellSide);
     };
 
     this.drawFood = function(food) {
@@ -160,8 +166,6 @@ export function Screen($screen, deviceWindow) {
         context.lineWidth = 1;
         context.strokeRect(food.position.x, food.position.y, this.cellSide, this.cellSide);
     }
-
-
 }
 
 function drawGrid(canvas, cellSide) {

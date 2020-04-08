@@ -12,8 +12,14 @@ let screen = undefined;
 let movement = undefined;
 
 $(document).ready(() => {
-    playGame();
     window.addEventListener("orientationchange", () => handleOrientationChange());
+
+    $('.up-arrow').on('click', () => handleArrowButton(Rules.UP));
+    $('.down-arrow').on('click', () => handleArrowButton(Rules.DOWN));
+    $('.left-arrow').on('click', () => handleArrowButton(Rules.LEFT));
+    $('.right-arrow').on('click', () => handleArrowButton(Rules.RIGHT));
+
+    playGame();
 });
 
 $(document).keydown((e) => {
@@ -24,11 +30,17 @@ $(document).keydown((e) => {
     }
 });
 
+
+function handleArrowButton(newMove) {
+    if (Rules.movementIsAllowed(newMove, movement))
+        movement = newMove;
+}
+
 function initializeGame() {
     movement = Rules.RIGHT;
     screen = new Screen($('#screen'), window);
     food = new Food(screen.bounds);
-    snake = new Snake(INITIAL_SNAKE_SIZE, screen.snakeBeginPosition);
+    snake = new Snake(screen.snakeBeginPosition, screen.cellSide);
 }
 
 function playGame() {
@@ -38,15 +50,13 @@ function playGame() {
 
 function continueGame() {
 
-   // screen.drawFood(food);
-    //screen.drawSnake(snake);
-
     setTimeout(() => {
         screen.clear();
         screen.drawFood(food);
         snake.move(movement, screen.cellSide);
         if (snake.ate(food)) {
             food = new Food(screen.bounds);
+            snake.grow();
         }
         screen.drawSnake(snake);
         if (Rules.snakeIsAlive(snake, screen))

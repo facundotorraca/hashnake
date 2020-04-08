@@ -8,6 +8,10 @@ export function Coordinate(x, y) {
         return new Coordinate(roundedX, roundedY);
     };
 
+    this.clone = function() {
+        return new Coordinate(this.x, this.y);
+    };
+
     this.move = function (direction, steps) {
         this.x += direction.dx * steps;
         this.y += direction.dy * steps;
@@ -23,5 +27,5 @@ export function Coordinate(x, y) {
 
     this.isEqualTo = function(otherCoordinate) {
         return otherCoordinate.x === this.x && otherCoordinate.y === this.y;
-    }
+    };
 }

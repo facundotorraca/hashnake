@@ -41,10 +41,10 @@ function SnakeBody(startPosition) {
     };
 
     this.wasBitten = function (head) {
-        this.position.forEach((bodyPosition) => {
-            if (bodyPosition.isEqualTo(head.position))
+        for (let i = 0; i < this.position.length; i++) {
+            if (this.position[i].isEqualTo(head.position))
                 return true;
-        });
+        }
         return false;
     }
 }

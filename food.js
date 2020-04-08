@@ -1,10 +1,12 @@
 import {Coordinate} from "./coordinate.js";
 
+/*----------AUXILIARY-FUNCTIONS-----------*/
 function _getRandomIntBetween(a, b) {
     //Returns a random number between [a,b]
     return Math.floor(Math.random() * (b - a + 1)) + a;
 }
 
+/*------------------FOOD------------------*/
 export function Food(spawnLimit) {
     //Use the convention from canvas: (0,0) top-left corner
     let x = _getRandomIntBetween(spawnLimit.left, spawnLimit.right);

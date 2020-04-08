@@ -20,9 +20,5 @@ export function movementIsAllowed(currentMove, previousMove) {
 }
 
 export function snakeIsAlive(snake, screen) {
-    if (snake.head.position.x < 0 || snake.head.position.x > (screen.size.width - screen.cellSide))
-        return false;
-    if (snake.head.position.y < 0 || snake.head.position.y > (screen.size.height - screen.cellSide))
-        return false;
-    return true;
+    return screen.isBetweenBounds(snake) && !snake.bitItself();
 }

@@ -1,6 +1,7 @@
 import {Coordinate} from "./coordinate.js";
 import {RIGHT, LEFT, DOWN, UP} from "./rules.js";
 
+/*----------AUXILIARY-FUNCTIONS-----------*/
 function _getMovementDirection(movement) {
     switch (movement) {
         case RIGHT:
@@ -14,6 +15,7 @@ function _getMovementDirection(movement) {
     }
 }
 
+/*------------------SNAKE-----------------*/
 function SnakeHead(position) {
     this.position = position;
 
@@ -37,6 +39,14 @@ function SnakeBody(position) {
     this.getLastPart = function () {
         return this.positions[this.positions.length - 1];
     };
+
+    this.wasBitten = function (head) {
+        this.positions.forEach((bodyPosition) => {
+            if (bodyPosition.isEqualTo(head.position))
+                return true;
+        });
+        return false;
+    }
 }
 
 function SnakeTail(position) {
@@ -45,18 +55,24 @@ function SnakeTail(position) {
     this.move = function (position) {
         this.position = position;
     };
+
+    this.wasBitten = function (head) {
+        return this.position.isEqualTo(head.position);
+    }
 }
 
-export function Snake(startPosition, a) {
-    //When moving position, dont affect screen
+export function Snake(startPosition) {
+    //Snake with N blocks-> [head] [0|Body|N-2] [tail]
     let headPos = startPosition.clone();
-    let bodyPos = startPosition.clone(); bodyPos.moveX(-1);
-    let tailPos = startPosition.clone(); tailPos.moveX(-2);
+    let bodyPos = startPosition.clone();
+    let tailPos = startPosition.clone();
+
+    bodyPos.moveX(-1);
+    tailPos.moveX(-2);
 
     this.head = new SnakeHead(headPos);
     this.body = new SnakeBody(bodyPos);
     this.tail = new SnakeTail(tailPos);
-
 
     this.move = function (movement, steps) {
         let direction = _getMovementDirection(movement);
@@ -90,4 +106,8 @@ export function Snake(startPosition, a) {
     this.ate = function (food) {
         return this.head.position.isEqualTo(food.position);
     };
+
+    this.bitItself = function () {
+        return this.body.wasBitten(this.head) || this.tail.wasBitten(this.head);
+    }
 }

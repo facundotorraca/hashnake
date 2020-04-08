@@ -1,3 +1,4 @@
+/*---------------COORDINATE---------------*/
 export function Coordinate(x, y) {
     this.x = x;
     this.y = y;
@@ -27,5 +28,13 @@ export function Coordinate(x, y) {
 
     this.isEqualTo = function(otherCoordinate) {
         return otherCoordinate.x === this.x && otherCoordinate.y === this.y;
+    };
+
+    this.xIsBetween = function (minX, maxX) {
+        return this.x >= minX && this.x <= maxX;
+    };
+
+    this.yIsBetween = function (minY, maxY) {
+        return this.y >= minY && this.y <= maxY;
     };
 }

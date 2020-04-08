@@ -40,7 +40,7 @@ function initializeGame() {
     movement = Rules.RIGHT;
     screen = new Screen($('#screen'), window);
     food = new Food(screen.bounds);
-    snake = new Snake(screen.snakeBeginPosition, screen.cellSide);
+    snake = new Snake(screen.snakeBeginPosition);
 }
 
 function playGame() {
@@ -49,7 +49,6 @@ function playGame() {
 }
 
 function continueGame() {
-
     setTimeout(() => {
         screen.clear();
         screen.drawFood(food);

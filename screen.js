@@ -2,7 +2,7 @@ import {Coordinate} from "./coordinate.js";
 
 let TOTAL_LINE_CELLS = 40;
 
-/*-------AUXILIARY-FUNCTIONS-----------*/
+/*---------AUXILIARY-FUNCTIONS------------*/
 function _getCanvasSize($canvas) {
     let HTML_DOM_canvas = $canvas[0]; //A HTML DOM Object
     let width = HTML_DOM_canvas.getBoundingClientRect().width;
@@ -51,7 +51,7 @@ function _getSnakeBeginPosition(canvasCenter, canvasCellSide) {
     return snakeBeginPosition;
 }
 
-/*-------CANVAS-CONFIGS-FUNCTION---------*/
+/*-------CANVAS-CONFIGS-FUNCTION----------*/
 function __getDevicePixelRatio(deviceWindow) {
     return deviceWindow.devicePixelRatio || 1;
 }
@@ -102,7 +102,7 @@ function _configureCanvasOnDevice($canvas, deviceWindow) {
 }
 
 
-/*-------------SCREEN-BOUNDS-------------*/
+/*-------------SCREEN-BOUNDS--------------*/
 function ScreenBound(height, width, cellSide) {
     //Use the convention from canvas: (0,0) top-left corner
     this.bottom = height - cellSide;
@@ -111,7 +111,7 @@ function ScreenBound(height, width, cellSide) {
     this.top = 0;
 }
 
-/*----------------SCREEN-----------------*/
+/*----------------SCREEN------------------*/
 export function Screen($screen, deviceWindow) {
     this.screen = $screen;
     this.cellSide = _getCanvasCellSide($screen);
@@ -134,6 +134,7 @@ export function Screen($screen, deviceWindow) {
 
     this.drawSnake = function(snake) {
         let context = _getCanvas2DContext(this.screen);
+
         let head = snake.head.position;
         let body = snake.body.positions;
         let tail = snake.tail.position;
@@ -165,25 +166,12 @@ export function Screen($screen, deviceWindow) {
 
         context.lineWidth = 1;
         context.strokeRect(food.position.x, food.position.y, this.cellSide, this.cellSide);
-    }
-}
+    };
 
-function drawGrid(canvas, cellSide) {
-
-    let ctx = _getCanvas2DContext(canvas);
-    let size = _getCanvasSize(canvas);
-
-    let w = size.width;
-    let h = size.height;
-
-    for (let x=0;x<=w;x+=cellSide) {
-        for (let y=0;y<=h;y+=cellSide) {
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, h);
-            ctx.stroke();
-            ctx.moveTo(0, y);
-            ctx.lineTo(w, y);
-            ctx.stroke();
-        }
-    }
+    this.isBetweenBounds = function (snake) {
+        //Use the convention from canvas: (0,0) top-left corner
+        let isBetweenX = snake.head.position.xIsBetween(this.bounds.left, this.bounds.right);
+        let isBetweenY = snake.head.position.yIsBetween(this.bounds.top, this.bounds.bottom);
+        return isBetweenX && isBetweenY;
+    };
 }

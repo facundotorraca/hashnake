@@ -1,3 +1,4 @@
+import {FirstH, FirstA, S, SecondH, N, SecondA, K, E} from './letter.js';
 import {Coordinate} from "./coordinate.js";
 
 const FOOD_BODY_CHAR = '@';
@@ -62,6 +63,29 @@ function _getSnakeBeginPosition(canvasCenter, canvasCellSide) {
         snakeBeginPosition.moveY(1);
 
     return snakeBeginPosition;
+}
+
+/*-----------------DEBUG------------------*/
+function _drawCanvasGrid($canvas, cellSide) {
+    let context = _getCanvas2DContext($canvas);
+    let canvasSize = _getCanvasSize($canvas);
+
+    let w = canvasSize.width;
+    let h = canvasSize.height;
+
+    context.lineWidth = 2;
+    context.fillStyle = 'gold';
+
+    for (let x = 0; x <= w; x += cellSide) {
+        for (let y = 0; y <= h; y += cellSide) {
+            context.moveTo(x, 0);
+            context.lineTo(x, h);
+            context.stroke();
+            context.moveTo(0, y);
+            context.lineTo(w, y);
+            context.stroke();
+        }
+    }
 }
 
 /*-------CANVAS-CONFIGS-FUNCTION----------*/
@@ -145,6 +169,8 @@ export function Screen($screen, deviceWindow) {
     };
 
     this.drawSnake = function(snake) {
+        _drawCanvasGrid(this.screen, this.cellSide);
+
         let context = _getCanvas2DContext(this.screen);
 
         let head = snake.head.position;
@@ -182,5 +208,29 @@ export function Screen($screen, deviceWindow) {
         let isBetweenY = snake.head.position.yIsBetween(this.bounds.top, this.bounds.bottom);
         return isBetweenX && isBetweenY;
     };
+
+    this.drawIntro = function () {
+        //_drawCanvasGrid(this.screen, this.cellSide);
+        let context = _getCanvas2DContext(this.screen);7
+        _setCanvasFont(this.screen, this.cellSide);
+
+        let h1 = new FirstH(this.cellSide);
+        let a1 = new FirstA(this.cellSide);
+        let s = new S(this.cellSide);
+        let h2 = new SecondH(this.cellSide);
+        let n = new N(this.cellSide);
+        let a2 = new SecondA(this.cellSide);
+        let k = new K(this.cellSide);
+        let e = new E(this.cellSide);
+        h1.draw(context);
+        a1.draw(context);
+        s.draw(context);
+        h2.draw(context);
+        n.draw(context);
+        a2.draw(context);
+        k.draw(context);
+        e.draw(context);
+    };
+
 }
 

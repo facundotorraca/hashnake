@@ -43,7 +43,6 @@ body {
 
 
 /*--------------------------SCREEN-STYLE-------------------------*/
-
 #screen {
     background: var(--color-primario);
     border-radius: 10px;
@@ -55,7 +54,6 @@ body {
     font-weight: bold;
     overflow: hidden; /*avoid scrollbar*/
 }
-
 /*---------------------------------------------------------------*/
 
 /*-----------------------GAMEPAD-ARROW-STYLE---------------------*/

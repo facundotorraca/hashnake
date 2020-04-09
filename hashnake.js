@@ -4,7 +4,6 @@ import {Screen} from './screen.js';
 import * as Rules  from './rules.js';
 
 const REFRESH_TIME = 100; //15 FPS
-const INITIAL_SNAKE_SIZE = 1;
 
 let food = undefined;
 let snake = undefined;
@@ -48,6 +47,8 @@ function playGame() {
 }
 
 function continueGame() {
+    screen.drawIntro();
+    /*
     setTimeout(() => {
         screen.clear();
         screen.drawFood(food);
@@ -62,7 +63,7 @@ function continueGame() {
         else
             handleDeath();
 
-    }, REFRESH_TIME);
+    }, REFRESH_TIME);*/
 }
 
 function handleDeath() {

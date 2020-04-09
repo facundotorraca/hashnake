@@ -9,6 +9,7 @@ let food = undefined;
 let snake = undefined;
 let screen = undefined;
 let movement = undefined;
+let playerOnGame = false;
 
 $(document).ready(() => {
     window.addEventListener("orientationchange", () => handleOrientationChange());
@@ -18,11 +19,17 @@ $(document).ready(() => {
     $('.left-arrow').on('click', () => handleArrowButton(Rules.LEFT));
     $('.right-arrow').on('click', () => handleArrowButton(Rules.RIGHT));
 
-    playGame();
+    playGame(true/*first time*/);
 });
 
 $(document).keydown((e) => {
     let newMove = e.key;
+
+    console.log(e.code);
+    if (e.code === 'Space' && !screen.isDisplayingAnimation && !playerOnGame) {
+        continueGame();
+    }
+
     if (Rules.movementIsAllowed(newMove, movement)) {
         movement = newMove;
         e.preventDefault(); //Prevent the default action (scroll)
@@ -41,14 +48,16 @@ function initializeGame() {
     snake = new Snake(screen.snakeBeginPosition);
 }
 
-function playGame() {
-     initializeGame();
-     continueGame();
+async function playGame(firstTime) {
+    initializeGame();
+    if (firstTime)
+        await screen.drawIntroPoster();
+    else
+        await screen.drawGameOverPoster();
 }
 
 function continueGame() {
-    screen.drawIntro();
-    /*
+    playerOnGame = true;
     setTimeout(() => {
         screen.clear();
         screen.drawFood(food);
@@ -61,13 +70,13 @@ function continueGame() {
         if (Rules.snakeIsAlive(snake, screen))
             continueGame();
         else
-            handleDeath();
-
-    }, REFRESH_TIME);*/
+            restartGame();
+    }, REFRESH_TIME);
 }
 
-function handleDeath() {
-    playGame();
+async function restartGame() {
+    playerOnGame = false;
+    playGame(false/*first time*/);
 }
 
 function handleOrientationChange() {

@@ -1,12 +1,18 @@
-import {FirstH, FirstA, S, SecondH, N, SecondA, K, E} from './letter.js';
 import {Coordinate} from "./coordinate.js";
+import {Intro, GameOver} from "./poster.js";
+
+const FONT_WEIGHT = 'bolder';
 
 const FOOD_BODY_CHAR = '@';
 const SNAKE_BODY_CHAR = '#';
-const FONT_STYLE = 'Verdana';
-const FONT_WEIGHT = 'bolder';
+const SNAKE_FONT_STYLE = 'Verdana';
+
+const INTRO_MESSAGE = 'Press A/SPACE to START';
+const INTRO_MESSAGE_FONT_SIZE = '5vw';
+const INTRO_MESSAGE_FONT_STYLE = 'Kenney Pixel';
 
 const TOTAL_LINE_CELLS = 40;
+const POSTER_HEIGHT = 3;
 
 /*-------CANVAS-AUXILIARY-FUNCTIONS-------*/
 function _getCanvasSize($canvas) {
@@ -39,12 +45,19 @@ function _getCanvas2DContext($canvas) {
     return $canvas[0].getContext('2d');
 }
 
-function _setCanvasFont($canvas, cellSide) {
+function _setSnakeCanvasFont($canvas, cellSide) {
     let context = _getCanvas2DContext($canvas);
     //Formula to get an approximated font size to fill the cell
     let a = Math.ceil(Math.sqrt(cellSide));
     let fontSize = Math.pow(a, 2);
-    context.font = `${FONT_WEIGHT} ${fontSize}px ${FONT_STYLE}`;
+    context.textAlign = 'start'; //Default
+    context.font = `${FONT_WEIGHT} ${fontSize}px ${SNAKE_FONT_STYLE}`;
+}
+
+function _setIntroCanvasFont($canvas){
+    let context = _getCanvas2DContext($canvas);
+    context.textAlign = 'center';
+    context.font = `${FONT_WEIGHT} ${INTRO_MESSAGE_FONT_SIZE} ${INTRO_MESSAGE_FONT_STYLE}`;
 }
 
 function _getSnakeBeginPosition(canvasCenter, canvasCellSide) {
@@ -151,6 +164,7 @@ function ScreenBound(height, width, cellSide) {
 export function Screen($screen, deviceWindow) {
     this.screen = $screen;
     this.cellSide = _getCanvasCellSide($screen);
+    this.isDisplayingAnimation = false;
 
     _configureCanvasOnDevice($screen, deviceWindow);
 
@@ -169,8 +183,7 @@ export function Screen($screen, deviceWindow) {
     };
 
     this.drawSnake = function(snake) {
-        _drawCanvasGrid(this.screen, this.cellSide);
-
+        //_drawCanvasGrid(this.screen, this.cellSide);
         let context = _getCanvas2DContext(this.screen);
 
         let head = snake.head.position;
@@ -178,7 +191,7 @@ export function Screen($screen, deviceWindow) {
         let tail = snake.tail.position;
 
         context.fillStyle = 'white';
-        _setCanvasFont(this.screen, this.cellSide);
+        _setSnakeCanvasFont(this.screen, this.cellSide);
 
         context.fillText(SNAKE_BODY_CHAR, head.x, head.y + this.cellSide);
         body.forEach((bodyPart) => {
@@ -190,7 +203,7 @@ export function Screen($screen, deviceWindow) {
     this.drawFood = function(food) {
         let context = _getCanvas2DContext(this.screen);
 
-        _setCanvasFont(this.screen, this.cellSide);
+        _setSnakeCanvasFont(this.screen, this.cellSide);
 
         while (food.position.x % this.cellSide !== 0)
             food.position.moveX(1);
@@ -209,28 +222,34 @@ export function Screen($screen, deviceWindow) {
         return isBetweenX && isBetweenY;
     };
 
-    this.drawIntro = function () {
-        //_drawCanvasGrid(this.screen, this.cellSide);
-        let context = _getCanvas2DContext(this.screen);7
-        _setCanvasFont(this.screen, this.cellSide);
+    this.drawIntroPoster = async function () {
+        this.isDisplayingAnimation = true;
 
-        let h1 = new FirstH(this.cellSide);
-        let a1 = new FirstA(this.cellSide);
-        let s = new S(this.cellSide);
-        let h2 = new SecondH(this.cellSide);
-        let n = new N(this.cellSide);
-        let a2 = new SecondA(this.cellSide);
-        let k = new K(this.cellSide);
-        let e = new E(this.cellSide);
-        h1.draw(context);
-        a1.draw(context);
-        s.draw(context);
-        h2.draw(context);
-        n.draw(context);
-        a2.draw(context);
-        k.draw(context);
-        e.draw(context);
+        let context = _getCanvas2DContext(this.screen);
+        _setSnakeCanvasFont(this.screen, this.cellSide);
+
+        let introPoster = new Intro(this.cellSide, POSTER_HEIGHT);
+        await introPoster.draw(context, 'gold');
+
+        _setIntroCanvasFont(this.screen);
+        context.fillText(INTRO_MESSAGE, this.center.x, this.center.y + this.cellSide);
+
+        this.isDisplayingAnimation = false;
     };
 
+    this.drawGameOverPoster = async function () {
+        this.isDisplayingAnimation = true;
+
+        let context = _getCanvas2DContext(this.screen);
+        _setSnakeCanvasFont(this.screen, this.cellSide);
+
+        let gameOverPoster = new GameOver(this.cellSide, POSTER_HEIGHT);
+        await gameOverPoster.draw(context, 'red');
+
+        _setIntroCanvasFont(this.screen);
+        context.fillText(INTRO_MESSAGE, this.center.x, this.center.y + this.cellSide);
+
+        this.isDisplayingAnimation = false;
+    }
 }
 

@@ -1,6 +1,6 @@
 import {AnimatedH, AnimatedA, AnimatedS, AnimatedN, AnimatedK, AnimatedE, AnimatedG, AnimatedM, AnimatedO, AnimatedV, AnimatedR, UPDATE_TIME} from './letter.js';
 
-function _loadIntroPoster(poster, cellSide, posterHeight) {
+function _loadIntroLandscape(poster, cellSide, posterHeight) {
     poster.push(new AnimatedH(cellSide, 1,  posterHeight));
     poster.push(new AnimatedA(cellSide, 6,  posterHeight));
     poster.push(new AnimatedS(cellSide, 11, posterHeight));
@@ -11,7 +11,19 @@ function _loadIntroPoster(poster, cellSide, posterHeight) {
     poster.push(new AnimatedE(cellSide, 36, posterHeight));
 }
 
-function _loadGameOverPoster(poster, cellSide, posterHeight) {
+function _loadIntroPortrait(poster, cellSide, posterHeight, xOffset) {
+    poster.push(new AnimatedH(cellSide, 1 + xOffset,  posterHeight));
+    poster.push(new AnimatedA(cellSide, 6 + xOffset,  posterHeight));
+    poster.push(new AnimatedS(cellSide, 11 + xOffset, posterHeight));
+    poster.push(new AnimatedH(cellSide, 16 + xOffset, posterHeight));
+    poster.push(new AnimatedN(cellSide, 1 + xOffset, posterHeight + 8));
+    poster.push(new AnimatedA(cellSide, 6 + xOffset, posterHeight + 8));
+    poster.push(new AnimatedK(cellSide, 11 + xOffset, posterHeight + 8));
+    poster.push(new AnimatedE(cellSide, 16 + xOffset, posterHeight + 8));
+}
+
+
+function _loadGameOverLandscape(poster, cellSide, posterHeight) {
     poster.push(new AnimatedG(cellSide, 1,  posterHeight));
     poster.push(new AnimatedA(cellSide, 6,  posterHeight));
     poster.push(new AnimatedM(cellSide, 11, posterHeight));
@@ -20,6 +32,17 @@ function _loadGameOverPoster(poster, cellSide, posterHeight) {
     poster.push(new AnimatedV(cellSide, 26, posterHeight));
     poster.push(new AnimatedE(cellSide, 31, posterHeight));
     poster.push(new AnimatedR(cellSide, 36, posterHeight));
+}
+
+function _loadGameOverPortrait(poster, cellSide, posterHeight, xOffset) {
+    poster.push(new AnimatedG(cellSide, 1 + xOffset,  posterHeight));
+    poster.push(new AnimatedA(cellSide, 6 + xOffset,  posterHeight));
+    poster.push(new AnimatedM(cellSide, 11 + xOffset, posterHeight));
+    poster.push(new AnimatedE(cellSide, 16 + xOffset, posterHeight));
+    poster.push(new AnimatedO(cellSide, 1 + xOffset, posterHeight + 8));
+    poster.push(new AnimatedV(cellSide, 6 + xOffset, posterHeight + 8));
+    poster.push(new AnimatedE(cellSide, 11 + xOffset, posterHeight + 8));
+    poster.push(new AnimatedR(cellSide, 16 + xOffset, posterHeight + 8));
 }
 
 function _getPosterDrawingTime(poster) {
@@ -33,10 +56,21 @@ function _getPosterDrawingTime(poster) {
     return maxDrawingTime + UPDATE_TIME;
 }
 
-function Poster(cellSide, posterHeight, loadingFunction)  {
+function _getScreenOrientation(screenSize) {
+    return (screenSize.height > screenSize.width) ? 'portrait' : 'landscape';
+}
+
+function Poster(cellSide, posterHeight, screenSize, portraitLoadingFunction, landscapeLoadingFunction) {
     this.poster = [];
 
-    loadingFunction(this.poster, cellSide, posterHeight);
+    if (_getScreenOrientation(screenSize) === 'portrait') {
+        //It only works for 8 letters posters (19 is half word -> 4*4(sizeLetter) + 3 (spaces)
+        let lineCells = screenSize.width / cellSide;
+        let xOffset = Math.floor((lineCells % 19)/2 - 1);
+        portraitLoadingFunction(this.poster, cellSide, posterHeight, xOffset);
+    } else {
+        landscapeLoadingFunction(this.poster, cellSide, posterHeight);
+    }
 
     this.drawingTime = _getPosterDrawingTime(this.poster);
 
@@ -48,10 +82,10 @@ function Poster(cellSide, posterHeight, loadingFunction)  {
     }
 }
 
-export function Intro(cellSide, posterHeight) {
-    Poster.call(this, cellSide, posterHeight, _loadIntroPoster);
+export function Intro(cellSide, posterHeight, screenSize) {
+    Poster.call(this, cellSide, posterHeight, screenSize, _loadIntroPortrait, _loadIntroLandscape);
 }
 
-export function GameOver(cellSide, posterHeight) {
-    Poster.call(this, cellSide, posterHeight, _loadGameOverPoster);
+export function GameOver(cellSide, posterHeight, screenSize) {
+    Poster.call(this, cellSide, posterHeight, screenSize, _loadGameOverPortrait, _loadGameOverLandscape);
 }

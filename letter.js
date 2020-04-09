@@ -1,6 +1,9 @@
 import {Coordinate} from "./coordinate.js";
 
 export const UPDATE_TIME = 100;
+export const LETTER_HEIGHT = 7;
+export const LETTER_WIDTH = 4;
+
 const LETTER_BODY_CHAR = '#';
 
 /*-----------AUXILIARY-_FUNCTIONS---------*/

@@ -228,7 +228,7 @@ export function Screen($screen, deviceWindow) {
         let context = _getCanvas2DContext(this.screen);
         _setSnakeCanvasFont(this.screen, this.cellSide);
 
-        let introPoster = new Intro(this.cellSide, POSTER_HEIGHT);
+        let introPoster = new Intro(this.cellSide, POSTER_HEIGHT, this.size);
         await introPoster.draw(context, 'gold');
 
         _setIntroCanvasFont(this.screen);
@@ -243,7 +243,7 @@ export function Screen($screen, deviceWindow) {
         let context = _getCanvas2DContext(this.screen);
         _setSnakeCanvasFont(this.screen, this.cellSide);
 
-        let gameOverPoster = new GameOver(this.cellSide, POSTER_HEIGHT);
+        let gameOverPoster = new GameOver(this.cellSide, POSTER_HEIGHT, this.size);
         await gameOverPoster.draw(context, 'red');
 
         _setIntroCanvasFont(this.screen);

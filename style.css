@@ -149,3 +149,17 @@ body {
     font-size: calc(10px + 2vw);
 }
 /*---------------------------------------------------------------*/
+
+/*---------------------------RIPPLE------------------------------*/
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+
+.ripple:active {
+    background-color: var(--color-secundario);
+    color: var(--color-primario);
+    background-size: 100%;
+    transition: background 0s;
+}
+/*---------------------------------------------------------------*/

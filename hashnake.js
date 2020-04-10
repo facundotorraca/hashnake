@@ -87,6 +87,5 @@ async function restartGame() {
 }
 
 function handleOrientationChange() {
-     document.getElementsByTagName('body')[0].style.transform = "rotate(90deg)"
-    //location.reload();
+    location.reload();
 }

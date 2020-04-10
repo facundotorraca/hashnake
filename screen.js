@@ -232,7 +232,7 @@ export function Screen($screen, deviceWindow) {
         await introPoster.draw(context, 'gold');
 
         _setIntroCanvasFont(this.screen);
-        context.fillText(INTRO_MESSAGE, this.center.x, this.center.y + this.cellSide);
+        context.fillText(INTRO_MESSAGE, this.center.x, this.center.y + 5*this.cellSide);
 
         this.isDisplayingAnimation = false;
     };
@@ -247,7 +247,7 @@ export function Screen($screen, deviceWindow) {
         await gameOverPoster.draw(context, 'red');
 
         _setIntroCanvasFont(this.screen);
-        context.fillText(INTRO_MESSAGE, this.center.x, this.center.y + this.cellSide);
+        context.fillText(INTRO_MESSAGE, this.center.x, this.center.y + 5*this.cellSide);
 
         this.isDisplayingAnimation = false;
     }

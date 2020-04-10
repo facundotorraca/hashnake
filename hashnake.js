@@ -27,8 +27,10 @@ $(document).ready(() => {
 $(document).keydown((e) => {
     let newMove = e.code;
 
-    if (newMove === 'Space')
+    if (newMove === 'Space') {
         handleAButton();
+        e.preventDefault(); //Prevent the default action (scroll)
+    }
 
     if (Rules.movementIsAllowed(newMove, movement)) {
         movement = newMove;

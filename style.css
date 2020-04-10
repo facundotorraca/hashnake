@@ -36,6 +36,7 @@ body {
     margin: 1em auto;
     padding: 1em;
 
+    user-focus-pointer: center;
     display: table;
     text-align: center;
     word-wrap: break-word;
@@ -51,7 +52,6 @@ body {
     height: 60vh;
     width: 100%;
 
-    user-focus: auto;
     font-weight: bold;
     overflow: hidden; /*avoid scrollbar*/
 }
@@ -77,7 +77,7 @@ body {
 
 .gamepad-arrow-vpos {
     border-radius: 5px;
-    font-size: calc(8px + 1vw);
+    font-size: calc(8px + 1.2vw);
     padding: 0.3em;
     border-width: 0.18em;
 }
@@ -105,7 +105,7 @@ body {
 #up-arrow-vpos{
     transform-origin: center;
     transform: rotate(270deg);
-    margin-bottom: 0.5em;
+    margin-bottom: 0.1em;
     margin-top: 1em;
 }
 

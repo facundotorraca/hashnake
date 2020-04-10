@@ -56,9 +56,16 @@ body {
     overflow: hidden; /*avoid scrollbar*/
 }
 
-@media only screen and (min-device-width : 360px) and (max-device-width : 640px) {
+@media only screen and (orientation: landscape) and (max-device-width: 750px){
     #screen {
          height: 50vh;
+    }
+}
+
+@media only screen and (orientation: landscape) and (min-device-width: 750px) and (max-device-width: 850px) {
+    #screen {
+        height: 80vh;
+        width: 45vw;
     }
 }
 

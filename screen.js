@@ -8,8 +8,8 @@ const SNAKE_BODY_CHAR = '#';
 const SNAKE_FONT_STYLE = 'Verdana';
 
 const INTRO_MESSAGE = 'Press A/SPACE to START';
-const INTRO_MESSAGE_FONT_SIZE = '5vw';
-const INTRO_MESSAGE_FONT_STYLE = 'Kenney Pixel';
+const INTRO_MESSAGE_FONT_SIZE = '2vw';
+const INTRO_MESSAGE_FONT_STYLE = '"Press Start 2P", cursive';
 
 const TOTAL_LINE_CELLS = 40;
 const POSTER_HEIGHT = 3;

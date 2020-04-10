@@ -90,7 +90,7 @@ export function Intro(cellSide, posterHeight, screenSize) {
         let xOffset = Math.floor((lineCells % lineLength)/2 - 1);
         _loadIntroPortrait(this._poster, cellSide, posterHeight, xOffset);
     } else {
-        _loadIntroLandscape(this._poster, cellSide, posterHeight, xOffset);
+        _loadIntroLandscape(this._poster, cellSide, posterHeight);
     }
 }
 
@@ -106,6 +106,6 @@ export function GameOver(cellSide, posterHeight, screenSize) {
         let xOffset = Math.floor((lineCells % lineLength)/2 - 1);
         _loadGameOverPortrait(this._poster, cellSide, posterHeight, xOffset);
     } else {
-        _loadGameOverLandscape(this._poster, cellSide, posterHeight, xOffset);
+        _loadGameOverLandscape(this._poster, cellSide, posterHeight);
     }
 }

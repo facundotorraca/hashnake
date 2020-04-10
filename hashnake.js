@@ -19,16 +19,16 @@ $(document).ready(() => {
     $('.left-arrow').on('click', () => handleArrowButton(Rules.LEFT));
     $('.right-arrow').on('click', () => handleArrowButton(Rules.RIGHT));
 
+    $('.a-button').on('click', () => handleAButton());
+
     playGame(true/*first time*/);
 });
 
 $(document).keydown((e) => {
-    let newMove = e.key;
+    let newMove = e.code;
 
-    console.log(e.code);
-    if (e.code === 'Space' && !screen.isDisplayingAnimation && !playerOnGame) {
-        continueGame();
-    }
+    if (newMove === 'Space')
+        handleAButton();
 
     if (Rules.movementIsAllowed(newMove, movement)) {
         movement = newMove;
@@ -39,6 +39,11 @@ $(document).keydown((e) => {
 function handleArrowButton(newMove) {
     if (Rules.movementIsAllowed(newMove, movement))
         movement = newMove;
+}
+
+function handleAButton() {
+    if (!screen.isDisplayingAnimation && !playerOnGame)
+        continueGame();
 }
 
 function initializeGame() {

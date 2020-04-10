@@ -49,11 +49,23 @@ body {
     border-radius: 10px;
     border: solid 0.35em var(--color-secundario);
 
-    height: 60vh;
+    height: 65vh;
     width: 100%;
 
     font-weight: bold;
     overflow: hidden; /*avoid scrollbar*/
+}
+
+@media only screen and (min-device-width : 360px) and (max-device-width : 640px) {
+    #screen {
+         height: 50vh;
+    }
+}
+
+@media (orientation: portrait) {
+    #screen {
+         height: 65vh;
+    }
 }
 /*---------------------------------------------------------------*/
 

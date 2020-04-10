@@ -17,7 +17,8 @@ function __drawLetterPart(context, cellSide, position) {
     context.fillText(LETTER_BODY_CHAR, x, y);
 }
 
-/*------AUXILIARY-LOADING_FUNCTIONS-------*/
+
+
 function _loadH(array, cellSide, x, y) {
     array.push(new Coordinate((x)*cellSide, (y)*cellSide));
     array.push(new Coordinate((x)*cellSide, (y+1)*cellSide));

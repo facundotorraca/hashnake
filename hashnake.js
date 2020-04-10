@@ -14,11 +14,13 @@ let playerOnGame = false;
 $(document).ready(() => {
     window.addEventListener("orientationchange", () => handleOrientationChange());
 
+    //Arrow handlers
     $('.up-arrow').on('click', () => handleArrowButton(Rules.UP));
     $('.down-arrow').on('click', () => handleArrowButton(Rules.DOWN));
     $('.left-arrow').on('click', () => handleArrowButton(Rules.LEFT));
     $('.right-arrow').on('click', () => handleArrowButton(Rules.RIGHT));
 
+    //Button handlers
     $('.a-button').on('click', () => handleAButton());
 
     playGame(true/*first time*/);
@@ -38,6 +40,11 @@ $(document).keydown((e) => {
     }
 });
 
+/*-------------HANDLERS-------------------*/
+function handleOrientationChange() {
+    location.reload();
+}
+
 function handleArrowButton(newMove) {
     if (Rules.movementIsAllowed(newMove, movement))
         movement = newMove;
@@ -48,6 +55,7 @@ function handleAButton() {
         continueGame();
 }
 
+/*-------------HASHNAKE------------------*/
 function initializeGame() {
     movement = Rules.RIGHT;
     screen = new Screen($('#screen'), window);
@@ -61,6 +69,11 @@ async function playGame(firstTime) {
         await screen.drawIntroPoster();
     else
         await screen.drawGameOverPoster();
+}
+
+async function restartGame() {
+    playerOnGame = false;
+    playGame(false/*first time*/);
 }
 
 function continueGame() {
@@ -81,11 +94,3 @@ function continueGame() {
     }, REFRESH_TIME);
 }
 
-async function restartGame() {
-    playerOnGame = false;
-    playGame(false/*first time*/);
-}
-
-function handleOrientationChange() {
-    location.reload();
-}

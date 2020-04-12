@@ -92,7 +92,7 @@ body {
 
 #record-lpos {
     position: relative;
-    bottom: 19vh;
+    bottom: calc(15px + 18vh);
 }
 
 @media only screen and (orientation: landscape) {

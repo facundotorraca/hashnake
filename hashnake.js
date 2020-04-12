@@ -1,18 +1,23 @@
 import {Food} from './food.js';
 import {Snake} from './snake.js';
 import {Screen} from './screen.js';
+import {SoundPlayer} from "./soundplayer.js";
 import * as Rules  from './rules.js';
 
+/*---------------CONSTANTS----------------*/
 const INITIAL_SNAKE_SIZE = 3;
 const REFRESH_TIME = 100; //15 FPS
 
+/*------------GAME-VARIABLES-------------*/
 let food = undefined;
 let snake = undefined;
 let screen = undefined;
 let movement = undefined;
 let playerOnGame = false;
+let soundplayer = undefined;
 
 $(document).ready(() => {
+    //Orientation change handler
     window.addEventListener('orientationchange', () => handleOrientationChange());
 
     //Arrow handlers
@@ -64,6 +69,7 @@ function initializeGame() {
     screen = new Screen($('#screen'), window);
     food = new Food(screen.bounds);
     snake = new Snake(screen.snakeBeginPosition);
+    soundplayer = new SoundPlayer(document);
 }
 
 async function playGame(firstTime) {
@@ -89,12 +95,15 @@ function continueGame() {
             food = new Food(screen.bounds);
             snake.grow();
             increaseScore();
+            soundplayer.playGrowSound();
         }
         screen.drawSnake(snake);
         if (Rules.snakeIsAlive(snake, screen))
             continueGame();
-        else
+        else {
+            soundplayer.playDeathSound();
             restartGame();
+        }
     }, REFRESH_TIME);
 }
 

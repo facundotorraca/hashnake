@@ -17,6 +17,11 @@
             <div id="landscape-mode" class="row d-flex justify-content-between">
                 <div id="arrows-area-lpos" class="col-md-3 col-lg-2 align-self-center d-none d-md-block">
                     <div class="row">
+                        <div class="col-md-12">
+                            <p id="score-lpos">score: xxx</p>
+                        </div>
+                    </div>
+                    <div class="row">
                             <div class="col-md-12">
                                 <button class="gamepad-arrow gamepad-arrow-lpos up-arrow ripple" id="up-arrow-lpos">>></button>
                             </div>
@@ -40,6 +45,11 @@
                 </div>
                 <div id="buttons-area-lpos" class="col-md-3 col-lg-2 align-self-center d-none d-md-block" >
                     <div class="row">
+                        <div class="col-md-12">
+                            <p id="record-lpos">record: xxx</p>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-6 col-sm-6">
                             <button class="gamepad-button gamepad-button-lpos a-button ripple" id="A-lpos">A</button>
                         </div>
@@ -52,36 +62,46 @@
 
             <!--"d-md-none" makes the column invisible when the screen size is medium or more-->
             <!--"d-flex justify-content-between" makes that each element(E) has the form EXXEXXE where X are spaces-->
-            <div id="vertical-mode" class="row d-md-none row d-flex justify-content-between">
-                <div id="arrows-area-vpos" class="col-6 col-sm-6 align-self-center">
-                    <div class="row">
-                        <div class="col-12 col-md-12">
-                            <button class="gamepad-arrow gamepad-arrow-vpos up-arrow ripple" id="up-arrow-vpos">>></button>
-                        </div>
+            <div  id="vertical-mode" class="d-md-none">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-6 col-md-6">
+                        <p id="score-vpos">score: xxx</p>
                     </div>
-                    <div class="row">
-                        <div class="col-6 col-sm-6">
-                            <button class="gamepad-arrow gamepad-arrow-vpos left-arrow ripple" id="left-arrow-vpos"><<</button>
-                        </div>
-                        <div class="col-6 col-sm-6">
-                            <button class="gamepad-arrow gamepad-arrow-vpos right-arrow ripple" id="right-arrow-vpos">>></button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-12">
-                            <button class="gamepad-arrow gamepad-arrow-vpos down-arrow ripple" id="down-arrow-vpos">>></button>
-                        </div>
+                    <div class="col-6 col-md-6">
+                        <p id="record-vpos">record: xxx</p>
                     </div>
                 </div>
-                <div id="buttons-area-vpos" class="col-6 col-sm-6 align-self-center">
-                    <div class="row">
-                        <!--"d-flex justify-content-end" allow the element(E) the form XXE where X are spaces-->
-                        <div class="col-6 col-sm-6 d-flex justify-content-end">
-                            <button class="gamepad-button gamepad-button-vpos a-button ripple" id="A-vpos">A</button>
+                <div class="row d-flex justify-content-between">
+                    <div id="arrows-area-vpos" class="col-6 col-sm-6 align-self-center">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <button class="gamepad-arrow gamepad-arrow-vpos up-arrow ripple" id="up-arrow-vpos">>></button>
+                            </div>
                         </div>
-                        <!--"d-flex justify-content-start" allow the element(E) the form EXX where X are spaces-->
-                        <div class="col-6 col-sm-6 d-flex justify-content-start">
-                            <button class="gamepad-button gamepad-button-vpos b-button ripple" id="B-vpos">B</button>
+                        <div class="row">
+                            <div class="col-6 col-sm-6">
+                                <button class="gamepad-arrow gamepad-arrow-vpos left-arrow ripple" id="left-arrow-vpos"><<</button>
+                            </div>
+                            <div class="col-6 col-sm-6">
+                                <button class="gamepad-arrow gamepad-arrow-vpos right-arrow ripple" id="right-arrow-vpos">>></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <button class="gamepad-arrow gamepad-arrow-vpos down-arrow ripple" id="down-arrow-vpos">>></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="buttons-area-vpos" class="col-6 col-sm-6 align-self-center">
+                        <div class="row">
+                            <!--"d-flex justify-content-end" allow the element(E) the form XXE where X are spaces-->
+                            <div class="col-6 col-sm-6 d-flex justify-content-end">
+                                <button class="gamepad-button gamepad-button-vpos a-button ripple" id="A-vpos">A</button>
+                            </div>
+                            <!--"d-flex justify-content-start" allow the element(E) the form EXX where X are spaces-->
+                            <div class="col-6 col-sm-6 d-flex justify-content-start">
+                                <button class="gamepad-button gamepad-button-vpos b-button ripple" id="B-vpos">B</button>
+                            </div>
                         </div>
                     </div>
                 </div>

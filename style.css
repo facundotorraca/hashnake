@@ -76,6 +76,28 @@ body {
 }
 /*---------------------------------------------------------------*/
 
+/*------------------------SCORE/RECORD---------------------------*/
+#score-vpos {
+    font-size: calc(5px + 1vh);
+}
+
+#record-vpos {
+    font-size: calc(4px + 1vh);
+}
+
+@media only screen and (orientation: landscape) {
+    #score-vpos {
+        font-size: calc(6px + 1vh);
+        margin-bottom: -2%;
+    }
+
+    #record-vpos {
+        font-size: calc(6px + 1vh);
+        margin-bottom: -2%;
+    }
+}
+/*---------------------------------------------------------------*/
+
 /*-----------------------GAMEPAD-ARROW-STYLE---------------------*/
 .gamepad-arrow {
     background: var(--color-primario);

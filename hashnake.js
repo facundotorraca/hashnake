@@ -15,6 +15,7 @@ let screen = undefined;
 let movement = undefined;
 let playerOnGame = false;
 let soundplayer = undefined;
+let firstTimeNewRecord = undefined;
 
 $(document).ready(() => {
     //Orientation change handler
@@ -42,6 +43,7 @@ $(document).keydown((e) => {
 
     if (Rules.movementIsAllowed(newMove, movement)) {
         movement = newMove;
+        soundplayer.moveSound.play();
         e.preventDefault(); //Prevent the default action (scroll)
     }
 });
@@ -52,13 +54,17 @@ function handleOrientationChange() {
 }
 
 function handleArrowButton(newMove) {
-    if (Rules.movementIsAllowed(newMove, movement))
+    if (Rules.movementIsAllowed(newMove, movement)) {
+        soundplayer.moveSound.play();
         movement = newMove;
+    }
 }
 
 function handleAButton() {
-    if (!screen.isDisplayingAnimation && !playerOnGame)
+    if (!screen.isDisplayingAnimation && !playerOnGame) {
+        soundplayer.replayBackground();
         continueGame();
+    }
 }
 
 /*-------------HASHNAKE------------------*/
@@ -66,10 +72,11 @@ function initializeGame() {
     restartScore();
     setLastRecord();
     movement = Rules.RIGHT;
+    soundplayer = new SoundPlayer();
     screen = new Screen($('#screen'), window);
     food = new Food(screen.bounds);
     snake = new Snake(screen.snakeBeginPosition);
-    soundplayer = new SoundPlayer(document);
+    firstTimeNewRecord = true;
 }
 
 async function playGame(firstTime) {
@@ -95,23 +102,30 @@ function continueGame() {
             food = new Food(screen.bounds);
             snake.grow();
             increaseScore();
-            soundplayer.playGrowSound();
+            soundplayer.growSound.play();
         }
         screen.drawSnake(snake);
         if (Rules.snakeIsAlive(snake, screen))
             continueGame();
         else {
-            soundplayer.playDeathSound();
+            soundplayer.background.pause();
+            soundplayer.deathSound.play();
+            soundplayer.gameoverSound.play();
             restartGame();
         }
     }, REFRESH_TIME);
 }
 
 function increaseScore() {
-    let score = snake.getSize() - INITIAL_SNAKE_SIZE;
+    let score = _getScore();
     _setScoreValue(score);
-    if (score > _getRecord())
+    if (score > _getRecord()) {
         _setRecordValue(score);
+        if (firstTimeNewRecord) {
+            soundplayer.highscoreSound.play();
+            firstTimeNewRecord = false;
+        }
+    }
 }
 
 function setLastRecord() {
@@ -128,12 +142,16 @@ function _setScoreValue(value) {
     $('.score').text('score: ' + value);
 }
 
-function _getRecord() {
-    let record = sessionStorage.getItem('record');
-    return (record) ? record : 0;
+function _getScore() {
+    return snake.getSize() - INITIAL_SNAKE_SIZE;
 }
 
 function _setRecordValue(value) {
     sessionStorage.setItem('record', value);
     $('.record').text('record: ' + value);
+}
+
+function _getRecord() {
+    let record = sessionStorage.getItem('record');
+    return (record) ? record : 0;
 }

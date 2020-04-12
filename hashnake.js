@@ -3,6 +3,7 @@ import {Snake} from './snake.js';
 import {Screen} from './screen.js';
 import * as Rules  from './rules.js';
 
+const INITIAL_SNAKE_SIZE = 3;
 const REFRESH_TIME = 100; //15 FPS
 
 let food = undefined;
@@ -12,7 +13,7 @@ let movement = undefined;
 let playerOnGame = false;
 
 $(document).ready(() => {
-    window.addEventListener("orientationchange", () => handleOrientationChange());
+    window.addEventListener('orientationchange', () => handleOrientationChange());
 
     //Arrow handlers
     $('.up-arrow').on('click', () => handleArrowButton(Rules.UP));
@@ -57,6 +58,8 @@ function handleAButton() {
 
 /*-------------HASHNAKE------------------*/
 function initializeGame() {
+    restartScore();
+    setLastRecord();
     movement = Rules.RIGHT;
     screen = new Screen($('#screen'), window);
     food = new Food(screen.bounds);
@@ -85,6 +88,7 @@ function continueGame() {
         if (snake.ate(food)) {
             food = new Food(screen.bounds);
             snake.grow();
+            increaseScore();
         }
         screen.drawSnake(snake);
         if (Rules.snakeIsAlive(snake, screen))
@@ -94,3 +98,33 @@ function continueGame() {
     }, REFRESH_TIME);
 }
 
+function increaseScore() {
+    let score = snake.getSize() - INITIAL_SNAKE_SIZE;
+    _setScoreValue(score);
+    if (score > _getRecord())
+        _setRecordValue(score);
+}
+
+function setLastRecord() {
+    let record = _getRecord();
+    _setRecordValue(record);
+}
+
+function restartScore() {
+    _setScoreValue(0);
+}
+
+/*-------------AUXILIARY-FUNCTIONS-----------*/
+function _setScoreValue(value) {
+    $('.score').text('score: ' + value);
+}
+
+function _getRecord() {
+    let record = sessionStorage.getItem('record');
+    return (record) ? record : 0;
+}
+
+function _setRecordValue(value) {
+    sessionStorage.setItem('record', value);
+    $('.record').text('record: ' + value);
+}

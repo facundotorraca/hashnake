@@ -85,6 +85,16 @@ body {
     font-size: calc(4px + 1vh);
 }
 
+#score-lpos {
+    position: relative;
+    bottom: 12vh;
+}
+
+#record-lpos {
+    position: relative;
+    bottom: 19vh;
+}
+
 @media only screen and (orientation: landscape) {
     #score-vpos {
         font-size: calc(6px + 1vh);

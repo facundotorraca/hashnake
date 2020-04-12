@@ -47,6 +47,10 @@ function SnakeBody(startPosition) {
         }
         return false;
     }
+
+    this.getSize = function () {
+        return this.position.length;
+    }
 }
 
 function SnakeTail(startPosition) {
@@ -109,5 +113,10 @@ export function Snake(startPosition) {
 
     this.bitItself = function () {
         return this.body.wasBitten(this.head) || this.tail.wasBitten(this.head);
+    }
+
+    this.getSize = function() {
+        //(head and tail) + body size
+        return 2 + this.body.getSize();
     }
 }

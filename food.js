@@ -1,3 +1,4 @@
+/*-----------------IMPORTS----------------*/
 import {Coordinate} from "./coordinate.js";
 
 /*----------AUXILIARY-FUNCTIONS-----------*/

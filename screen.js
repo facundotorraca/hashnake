@@ -1,6 +1,8 @@
+/*-----------------IMPORTS----------------*/
 import {Coordinate} from "./coordinate.js";
 import {Intro, GameOver} from "./poster.js";
 
+/*---------------CONSTANTS----------------*/
 const FONT_WEIGHT = 'bolder';
 
 const FOOD_BODY_CHAR = '@';

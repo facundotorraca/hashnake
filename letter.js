@@ -1,5 +1,7 @@
+/*----------------IMPORTS-----------------*/
 import {Coordinate} from "./coordinate.js";
 
+/*---------------CONSTANTS----------------*/
 export const UPDATE_TIME = 100;
 export const LETTER_HEIGHT = 7;
 export const LETTER_WIDTH = 4;
@@ -17,8 +19,7 @@ function __drawLetterPart(context, cellSide, position) {
     context.fillText(LETTER_BODY_CHAR, x, y);
 }
 
-
-
+/*-------------LOAD-FUNCTIONS-------------*/
 function _loadH(array, cellSide, x, y) {
     array.push(new Coordinate((x)*cellSide, (y)*cellSide));
     array.push(new Coordinate((x)*cellSide, (y+1)*cellSide));

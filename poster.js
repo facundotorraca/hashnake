@@ -1,3 +1,4 @@
+/*----------------IMPORTS-----------------*/
 import {AnimatedH, AnimatedA, AnimatedS, AnimatedN, AnimatedK, AnimatedE,
         AnimatedG, AnimatedM, AnimatedO, AnimatedV, AnimatedR,
         UPDATE_TIME, LETTER_WIDTH, LETTER_HEIGHT} from './letter.js';

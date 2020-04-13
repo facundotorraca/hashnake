@@ -1,8 +1,10 @@
+/*---------------CONSTANTS----------------*/
 export const UP = 'ArrowUp';
 export const LEFT = 'ArrowLeft';
 export const DOWN  = 'ArrowDown';
 export const RIGHT = 'ArrowRight';
 
+/*-----------------RULES------------------*/
 export function movementIsAllowed(currentMove, previousMove) {
     //Second condition avoid reverse gear
     switch (currentMove) {

@@ -1,3 +1,4 @@
+/*---------------CONSTANTS----------------*/
 const GROW_SOUND_PATH = 'sound/grow.wav';
 const MOVE_SOUND_PATH = 'sound/move.wav';
 const DEATH_SOUND_PATH = 'sound/death.wav';
@@ -5,6 +6,7 @@ const GAMEOVER_SOUND_PATH = 'sound/gameover.wav';
 const HIGHSCORE_SOUND_PATH = 'sound/highscore.wav';
 const BACKGROUND_SOUND_PATH = 'sound/background.wav';
 
+/*-----------AUXILIARY-FUNCTIONS----------*/
 function _resetAudio(audio) {
     audio.currentTime = 0;
 }
@@ -16,6 +18,7 @@ function _setLoopProperty(audio) {
     });
 }
 
+/*------------SOUNDPLAYER-----------------*/
 export function SoundPlayer() {
     this.growSound = new Audio(GROW_SOUND_PATH);
     this.moveSound = new Audio(MOVE_SOUND_PATH);

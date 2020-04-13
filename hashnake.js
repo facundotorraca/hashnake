@@ -1,3 +1,4 @@
+/*-----------------IMPORTS----------------*/
 import {Food} from './food.js';
 import {Snake} from './snake.js';
 import {Screen} from './screen.js';
@@ -41,9 +42,8 @@ $(document).keydown((e) => {
         e.preventDefault(); //Prevent the default action (scroll)
     }
 
-    if (Rules.movementIsAllowed(newMove, movement)) {
-        movement = newMove;
-        soundplayer.moveSound.play();
+    if (_isArrow(newMove)) {
+        handleArrowButton(newMove);
         e.preventDefault(); //Prevent the default action (scroll)
     }
 });
@@ -154,4 +154,16 @@ function _setRecordValue(value) {
 function _getRecord() {
     let record = sessionStorage.getItem('record');
     return (record) ? record : 0;
+}
+
+function _isArrow(newMove) {
+    if (newMove === 'ArrowUp')
+        return true;
+    if (newMove === 'ArrowDown')
+        return true;
+    if (newMove === 'ArrowLeft')
+        return true;
+    if (newMove === 'ArrowRight')
+        return true;
+    return false;
 }

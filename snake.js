@@ -1,3 +1,4 @@
+/*-----------------IMPORTS----------------*/
 import {Coordinate} from "./coordinate.js";
 import {RIGHT, LEFT, DOWN, UP} from "./rules.js";
 
